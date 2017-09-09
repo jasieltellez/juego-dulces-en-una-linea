@@ -47,7 +47,8 @@ $(document).ready(function(){
         $(aux).addClass('elemento')
         $(aux).draggable({
           drag: function(event,ui){
-            drag(event,ui)}
+            drag(event,ui)},
+          revert:"invalid"
 
         })
         $(aux).droppable({
@@ -158,7 +159,8 @@ $(document).ready(function(){
             $(aux).addClass('elemento')
             $(aux).draggable({
               drag: function(event,ui){
-                drag(event,ui)}
+                drag(event,ui)},
+              revert:"invalid"
 
             })
             $(aux).droppable({
@@ -203,14 +205,24 @@ $(document).ready(function(){
 
   function drop(event,ui) {
     var c=$(ui.draggable)[0]
-    mov2X=event.pageX
-    mov2Y=event.pageY
     imagen2=$(c).clone()
-   $(event.target).before(imagen2)
-   $(event.target).replaceAll($(c))
+    $(imagen2).draggable({
+      drag: function(event,ui){
+        drag(event,ui)},
+      revert:"invalid"
 
+    })
+    $(imagen2).droppable({
+      drop: function(event,ui){
+        drop(event,ui)
+      }
+    });
+
+   $(event.target).before(imagen2)
+   $(event.target).replaceAll(ui.draggable[0])
+   $(imagen2).css("position","")
+   var tb=cargarMatriz()
+   verificarEliminaciones(tb)
   }
-  function allowDrop(ev) {
-    ev.preventDefault();
-  }
+
 })
