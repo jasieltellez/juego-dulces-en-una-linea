@@ -3,7 +3,7 @@
 
 $(document).ready(function(){
   var puntuacion=$('#score-text').text()
-  var mov1X,mov1Y,mov2X,mov2Y
+  var movimientos=$('#movimientos-text').text()
   var imagen1,imagen2
 
   $('#start').on('click',function(){
@@ -23,10 +23,12 @@ $(document).ready(function(){
         })
       }
     }
+    startTime()
     limpiarTablero()
     llenarTablero()
     var t= cargarMatriz()
     verificarEliminaciones(t)
+
   })
   //A partir de aqui empiezan las funciones
   /*Funcion de Carga Inicial del Juego*/
@@ -36,6 +38,7 @@ $(document).ready(function(){
       $(cl).empty()
     }
     $('#score-text').text('0')
+    $('#movimientos-text').text('0')
   }
   /*Genera los 49 elementos del tablero Inicial*/
   function llenarTablero(){
@@ -48,7 +51,8 @@ $(document).ready(function(){
         $(aux).draggable({
           drag: function(event,ui){
             drag(event,ui)},
-          revert:"invalid"
+          revert:"invalid",
+          helper:"clone"
 
         })
         $(aux).droppable({
@@ -160,7 +164,8 @@ $(document).ready(function(){
             $(aux).draggable({
               drag: function(event,ui){
                 drag(event,ui)},
-              revert:"invalid"
+              revert:"invalid",
+              helper:"clone"
 
             })
             $(aux).droppable({
@@ -181,25 +186,13 @@ $(document).ready(function(){
 
 
   }
-  function gameover(){
-    $('#panel-tablero').hide('drop',1000,function(){
-      $('#panel-score')
-      .animate({
-        width:"100%",
-
-      })
-      $('#panel-score').addClass('gameover')
-    })
-  }
+  
 
   /*Funciones para el drag and drop*/
   /*var mov1X,mov1Y,mov2X,mov2Y
   var imagen1,imagen2*/
   function drag(event,ui) {
 
-    mov1X=event.pageX
-    mov1Y=event.pageY
-    imagen1=event.target
 
   }
 
@@ -209,7 +202,8 @@ $(document).ready(function(){
     $(imagen2).draggable({
       drag: function(event,ui){
         drag(event,ui)},
-      revert:"invalid"
+      revert:"invalid",
+      helper:"clone"
 
     })
     $(imagen2).droppable({
@@ -221,6 +215,7 @@ $(document).ready(function(){
    $(event.target).before(imagen2)
    $(event.target).replaceAll(ui.draggable[0])
    $(imagen2).css("position","")
+   $('#movimientos-text').text(parseFloat($('#movimientos-text').text())+1)
    var tb=cargarMatriz()
    verificarEliminaciones(tb)
   }
