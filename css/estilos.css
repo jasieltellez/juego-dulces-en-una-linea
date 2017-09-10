@@ -25,6 +25,9 @@ body{
   color: #DCFF0E;
   width: 100%;
 }
+.light{
+  color: white;
+}
 #time-over{
   font-family: gameFont;
   font-size: 2em;

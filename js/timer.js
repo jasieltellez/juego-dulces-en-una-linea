@@ -1,10 +1,18 @@
+var a =new function(){//Efecto de cambio de color del titulo pricipal
+  setInterval(function(){
+      var t=$(".main-titulo")[0]
+      $(t).toggleClass('light')
+    }, 1000);
+}
 
-function startTime(){
+
+function startTime(interv,cmd){
+
   var Example2 = new (function() {
       var $countdown,
 
           incrementTime = 70,
-          currentTime = 1000,
+          currentTime = interv,
           updateTimer = function() {
               $countdown.html(formatTime(currentTime));
               if (currentTime == 0) {
@@ -18,15 +26,13 @@ function startTime(){
           },
           timerComplete = function() {
 
-              $('#panel-tablero').hide('drop',1000,function(){
-                $('#panel-score')
-                .animate({
-                  width:"100%",
-
-                })
-                $('#panel-score').addClass('gameover')
+                $('#panel-tablero').hide('drop',1000,function(){
+                  $('#panel-score').animate({ width:"100%"},"slow")
+                  $('#panel-score').addClass('gameover')
                   $('#time-over').show()
-              })
+                })
+
+
 
 
           },
@@ -58,5 +64,7 @@ function startTime(){
       }
       $(init);
   });
+if (cmd=="reset") {
 
+}
 }
