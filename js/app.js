@@ -1,13 +1,11 @@
 $(document).ready(function(){
-  var puntuacion=$('#score-text').text()
-  var movimientos=$('#movimientos-text').text()
   var imagen2,x1,y1
 
   $('#start').on('click',function(){
     var est=$('.btn-reinicio')[0]
     if ($(est).text()=='Iniciar') {
       $(est).text('Reiniciar')
-      startTime(12000,"reset")
+      startTime(12000)
     }
     else {
       if ($('#panel-score').hasClass('gameover')) {
@@ -21,7 +19,8 @@ $(document).ready(function(){
           $('#panel-score').removeClass('gameover')
         })
       }
-      
+      reloj.resetCountdown()
+      startTime(12000)
     }
 
 
@@ -134,7 +133,7 @@ $(document).ready(function(){
         }
       }
 
-      if (contVertical!=0||contHorizontal!=0) {
+      if (contVertical!=0||contHorizontal!=0) {//Si hay objetos para eliminar
 
         $('#score-text').text(parseFloat($('#score-text').text())+((contHorizontal+contVertical)*10))//Por cada elemento eliminado suma 10 puntos
 
